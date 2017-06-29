@@ -4,9 +4,10 @@ class Board(){
 
   val boardSize = 8
 
-  startingSet()
 
   var fields = Array.ofDim[Field](boardSize, boardSize)
+
+  startingSet()
 
   def isOccupied(pos: Position) = fields(pos.x)(pos.y).isOccupied
 
@@ -15,13 +16,17 @@ class Board(){
   def startingSet(): Unit = {
     var modd: Int = 1
     for(j <- (0 to 2)) {
-      for (i <- (0 to 7) if i % 2 == modd) fields(j)(i).standChecker(CheckerColor.White)
+      for (i <- (0 to 7) if i % 2 == modd){
+        fields(j)(i) = new Field(j, i, CheckerColor.White)
+      }
       modd += 1
       modd %= 2
     }
 
     for(j <- (5 to 7)) {
-      for (i <- (0 to 7) if i % 2 == modd) fields(j)(i).standChecker(CheckerColor.White)
+      for (i <- (0 to 7) if i % 2 == modd) {
+        fields(j)(i) = new Field(j, i, CheckerColor.Black)
+      }
       modd += 1
       modd %= 2
     }
