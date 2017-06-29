@@ -22,7 +22,7 @@ object Parser {
       false
   }
 
-  def correctness(line: String) = {
+  def isCorrect(line: String) = {
     var correct = true
     if(!checkLetter(line(0))) correct = false
     if(!checkNumber(line(1))) correct = false
@@ -33,7 +33,7 @@ object Parser {
   }
 
   def parse(line: String) = {
-    if(!correctness(line)) println("Wrong argument")
+    if(!isCorrect(line)) println("Wrong argument")
     else{
       //zwrócenie funkcji
       val start = new Position(line(0).toInt - 64, line(1).toInt - 48)
@@ -49,7 +49,7 @@ object Parser {
   }
 
   def main(args: Array[String]): Unit = {
-    // if(correctness("C1,D3")) println("Tak")
+    // if(isCorrect("C1,D3")) println("Tak")
     // else println("Nie")
     var qwe = parse("C1,D3")
     println(qwe)

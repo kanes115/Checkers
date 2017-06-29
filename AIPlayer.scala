@@ -1,5 +1,4 @@
-class AIPlayer(val myColor: CheckerColor, val amountOfForwardMoves: Int) extends Player{
-
+class AIPlayer(val myColor: CheckerColor, val amountOfForwardMoves: Int, val name: String = "BOT Janusz") extends Player{
 
   def getNextMove(master: Master): Move = {
     List[Move] allMoves = getAllPossibleMoves(master)
@@ -9,7 +8,6 @@ class AIPlayer(val myColor: CheckerColor, val amountOfForwardMoves: Int) extends
     makeMovesOnMaster(mockMaster, allMoves, amountOfForwardMoves)
 
   }
-
 
   def makeMovesOnMaster(val master: Master, val moves: List[Move], deepLvl: Int): Int = {
     if(deepLvl == amountOfForwardMoves)
@@ -24,12 +22,14 @@ class AIPlayer(val myColor: CheckerColor, val amountOfForwardMoves: Int) extends
     maxx
   }
 
+  def getName() = name
+
   private[this] def getAllPossibleMoves(master: Master) = {
 
     var myMoves = new List[Move]()
 
     myMoves = for(x <- (0 to board.boardSize), y <- (0 to board.boardSize), board.whatCheckerAt(x, y) == myColor)
-      yield master.getAllPossibleMovesFor(board, x, y)
+      yield master.getAllPossibleMovesFor(x, y)
 
     myMoves.flatten
   }
