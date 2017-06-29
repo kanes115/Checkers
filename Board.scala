@@ -1,8 +1,10 @@
 class Board(){
 
+  val boardSize = 8
+
   startingSet()
 
-  var fields = Array.ofDim[Field](8, 8)
+  var fields = Array.ofDim[Field](boardSize, boardSize)
 
   def isOccupied(x: Int, y: Int) = fields[x][y].isOccupied
 
@@ -22,5 +24,8 @@ class Board(){
       modd %= 2
     }
   }
+
+
+
 
 }
