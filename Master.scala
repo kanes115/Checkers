@@ -26,7 +26,11 @@ class Master(val player1: Player, val player2: Player, val board: Board){
         if(next.isAttackingMove){
           val attacked = next.whatWasAttacked
           board.free(attacked)
-          blacks -= 1
+
+          if(isPlayer1Move)
+            blacks -= 1
+          else
+            whites -= 1
         }
       }
 
