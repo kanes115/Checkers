@@ -24,13 +24,12 @@ class Master(val player1: Player, val player2: Player, val board: Board){
       if(board.isInsideBoard(pos) && board.whatCheckerAt(pos) == CheckerColor.None)
         res += Move(startPos, pos)
       else if(board.isInsideBoard(pos) && board.whatCheckerAt(pos) == player2.getColor){
-        val vect = (pos.x - startPos.x, pos.y - startPos.y)
+        val vect = new Position(pos.x - startPos.x, pos.y - startPos.y)
 
+        if(board.isInsideBoard(pos + vect) &&  board.whatCheckerAt(pos) == CheckerColor.None)
+          res += Move(startPos, pos)
       }
     }
-
-
-
 
   }
 
