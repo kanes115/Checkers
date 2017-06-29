@@ -13,6 +13,8 @@ class Master(val player1: Player, val player2: Player, val board: Board){
 
     while(whites != 0 && blacks != 0){
 
+      println(board)
+
       val currPlayer = if(isPlayer1Move)
         player1
       else

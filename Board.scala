@@ -41,10 +41,10 @@ class Board(){
 
   override def toString: String = {
     var res: String = "-" * (boardSize + 2)
-    for(i <- (0 to boardSize)){
+    for(i <- (0 until boardSize)){
       res += "\n|"
-      for(j <- (0 to boardSize)){
-        res += fields(i)(j).occupiedBy + "|"
+      for(j <- (0 until boardSize)){
+        res += fields(i)(j).occupiedBy.toString + "|"
       }
     }
     res
