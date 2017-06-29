@@ -1,4 +1,1 @@
-class Position(xC: Int, yC: Int) {
-  var x: Int = xC
-  var y: Int = yC
-}
+class Position(val x: Int, val y: Int) {}
