@@ -1,1 +1,1 @@
-class Move(val startC: Position, val endC: Position) {}
+class Move(val start: Position, val end: Position) { }
