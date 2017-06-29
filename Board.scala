@@ -7,11 +7,18 @@ class Board(){
 
   var fields = Array.ofDim[Field](boardSize, boardSize)
 
+  for(i <- (0 to 7))
+    for(j <- (0 to 7))
+      fields(i)(j) = new Field(i, j, CheckerColor.None)
+
   startingSet()
 
   def isOccupied(pos: Position) = fields(pos.x)(pos.y).isOccupied
 
-  def whatCheckerAt(pos: Position) = fields(pos.x)(pos.y).occupiedBy
+  def whatCheckerAt(pos: Position) = {
+    println(pos.x, pos.y)
+    fields(pos.x)(pos.y).occupiedBy
+  }
 
   def startingSet(): Unit = {
     var modd: Int = 1
