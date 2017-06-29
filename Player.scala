@@ -1,4 +1,4 @@
-trait Player(color: CheckerColor){
+abstract class Player(color: CheckerColor){
 
   if(color == CheckerColor.None)
     throw IllegalArgumentException("You must specify a certain color, not a None")
@@ -17,7 +17,7 @@ trait Player(color: CheckerColor){
     this.color = color
   }
 
-  def getColor(): CheckerColor: CheckerColor = {
+  def getColor(): CheckerColor = {
     color
   }
 

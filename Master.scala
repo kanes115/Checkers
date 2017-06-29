@@ -47,7 +47,7 @@ class Master(val player1: Player, val player2: Player, val board: Board){
 
     var res = new List[Move]()
 
-    val additives = for(x <- (-1, 1), y <- (-1, 1)) yield (x, y)
+    val additives = for(x <- (-1, 1); y <- (-1, 1)) yield (x, y)
 
     for((d, e) <- additives){
       var pos = new Position(x + d, y + e)

@@ -13,13 +13,13 @@ class Board(){
   def startingSet(): Unit = {
     var modd: Int = 1
     for(j <- (0 to 2)) {
-      for (i <- (0 to 7), i % 2 == modd) field(j)(i).stand(CheckerColor.White)
+      for (i <- (0 to 7) if i % 2 == modd) fields(j)(i).stand(CheckerColor.White)
       modd += 1
       modd %= 2
     }
 
     for(j <- (5 to 7)) {
-      for (i <- (0 to 7), i % 2 == modd) field(j)(i).stand(CheckerColor.White)
+      for (i <- (0 to 7) if i % 2 == modd) fields(j)(i).stand(CheckerColor.White)
       modd += 1
       modd %= 2
     }

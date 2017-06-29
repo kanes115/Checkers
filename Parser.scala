@@ -43,12 +43,8 @@ object Parser {
     }
   }
 
-  // def main(args: Array[String]): Unit = {
-  //   // if(correctness("C1,D3")) println("Tak")
-  //   // else println("Nie")
-  //   var qwe = parse("C1,D3")
-  //   println(qwe.start)
-  //   // println(qwe.start.x)
-  // }
+  def main(args: Array[String]): Unit = {
+    run()
+  }
 
 }

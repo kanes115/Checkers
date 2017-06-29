@@ -1,4 +1,4 @@
-class Field(val x, val y, var occupiedBy: CheckerColor = CheckerColor.None){
+class Field(val x: Int, val y: Int, var occupiedBy: CheckerColor = CheckerColor.None){
 
   if(x < 0 || x > 7)
     throw new IllegalArgumentException("Field must be between 0 and 7");
@@ -12,11 +12,10 @@ class Field(val x, val y, var occupiedBy: CheckerColor = CheckerColor.None){
   }
 
   def isOccupied(): Unit ={
-    case occupiedBy match{
-      CheckerColor.None => false
-      _ => true
+    occupiedBy match{
+      case CheckerColor.None => false
+      case _ => true
     }
   }
 
 }
-
