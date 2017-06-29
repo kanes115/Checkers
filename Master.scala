@@ -23,13 +23,16 @@ class Master(val player1: Player, val player2: Player, val board: Board){
       List[Move] possible = getAllPossibleMovesFor(next.start, currPlayer)
       if(possible.contains(next)) {
         makeMove(next)
-        if(next.isAttackingMove{
+        if(next.isAttackingMove){
           val attacked = next.whatWasAttacked
           board.free(attacked)
           blacks -= 1
         }
       }
-      
+
+      if(next.isAttackingMove)
+        ifcurrPlayer = !currPlayer
+
     }
 
   }
