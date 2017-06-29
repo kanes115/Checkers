@@ -1,3 +1,5 @@
+import CheckerColor._
+
 class Field(val x: Int, val y: Int, var occupiedBy: CheckerColor = CheckerColor.None){
 
   if(x < 0 || x > 7)
@@ -11,7 +13,7 @@ class Field(val x: Int, val y: Int, var occupiedBy: CheckerColor = CheckerColor.
     occupiedBy = checker
   }
 
-  def isOccupied(): Unit ={
+  def isOccupied(): Boolean ={
     occupiedBy match{
       case CheckerColor.None => false
       case _ => true

@@ -1,24 +1,26 @@
-abstract class Player(color: CheckerColor){
+import CheckerColor._
 
-  if(color == CheckerColor.None)
+abstract class Player(var myColor: CheckerColor, var myName: String){
+
+  if(myColor == CheckerColor.None)
     throw new IllegalArgumentException("You must specify a certain color, not a None")
 
-  var color: CheckerColor = color
+  var color: CheckerColor = myColor
 
 
   def getNextMove(master: Master): Move
 
-  def getName(): String
+  def getName(): String = myName
 
   def giveColor(color: CheckerColor) = {
     if(color == CheckerColor.None)
-      throw IllegalArgumentException("You must specify a certain color, not a None")
+      throw new IllegalArgumentException("You must specify a certain color, not a None")
 
-    this.color = color
+    myColor = color
   }
 
   def getColor(): CheckerColor = {
-    color
+    myColor
   }
 
 }

@@ -1,3 +1,5 @@
+import CheckerColor._
+
 class Board(){
 
   val boardSize = 8
@@ -47,7 +49,7 @@ class Board(){
   }
 
   def free(pos: Position) {
-    fields(pos.x)(pos.y) = CheckerColor.None
+    fields(pos.x)(pos.y).standChecker(CheckerColor.None)
   }
 
 

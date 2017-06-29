@@ -41,7 +41,7 @@ class Master(val player1: Player, val player2: Player, val board: Board){
   }
 
   def getAllPossibleMovesFor(startPos: Position, player: Player): List[Move] = {
-    if(board.whatCheckerAt(x, y) != player.getColor())
+    if(board.whatCheckerAt(startPos) != player.getColor())
       List[Move]()
 
     var res: List[Move] = List()
@@ -67,7 +67,7 @@ class Master(val player1: Player, val player2: Player, val board: Board){
 
   private[this] def makeMove(move: Move, pl: Player): Unit ={
     board.free(move.start)
-    board.standChecker(move.start, pl.getColor)
+    board.standChecker(pl.getColor, move.start)
   }
 
 

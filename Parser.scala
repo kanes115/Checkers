@@ -1,4 +1,4 @@
-import com.sun.tools.classfile.ConstantPool.InvalidEntry
+import com.sun.media.sound.InvalidFormatException
 
 object Parser {
   /**
@@ -35,7 +35,7 @@ object Parser {
   }
 
   def parse(line: String): Move = {
-    if(!correctness(line)) throw new InvalidEntry("Wrong argument")
+    if(!correctness(line)) throw new InvalidFormatException("Wrong argument")
     else{
       //zwrócenie funkcji
       val start = new Position(line(0).toInt - 64, line(1).toInt - 48)
@@ -46,7 +46,11 @@ object Parser {
   }
 
   def main(args: Array[String]): Unit = {
-    run()
+    val p1 = new Player("Eddie")
+    val p2 = new Player("Jack")
+    val board = new Board()
+    master = new Master(p1, p2, board)
+    master.run()
   }
 
 }
