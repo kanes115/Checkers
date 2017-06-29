@@ -1,3 +1,5 @@
+import com.sun.tools.classfile.ConstantPool.InvalidEntry
+
 object Parser {
   /**
    * example: C1,D3
@@ -32,8 +34,8 @@ object Parser {
     correct
   }
 
-  def parse(line: String) = {
-    if(!correctness(line)) println("Wrong argument")
+  def parse(line: String): Move = {
+    if(!correctness(line)) throw new InvalidEntry("Wrong argument")
     else{
       //zwrócenie funkcji
       val start = new Position(line(0).toInt - 64, line(1).toInt - 48)

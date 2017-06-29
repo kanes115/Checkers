@@ -1,7 +1,7 @@
 abstract class Player(color: CheckerColor){
 
   if(color == CheckerColor.None)
-    throw IllegalArgumentException("You must specify a certain color, not a None")
+    throw new IllegalArgumentException("You must specify a certain color, not a None")
 
   var color: CheckerColor = color
 
