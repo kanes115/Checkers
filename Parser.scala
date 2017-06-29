@@ -46,10 +46,10 @@ object Parser {
   }
 
   def main(args: Array[String]): Unit = {
-    val p1 = new Player("Eddie")
-    val p2 = new Player("Jack")
+    val p1: Player = new RealPlayer(CheckerColor.White, "Eddie")
+    val p2: Player = new RealPlayer(CheckerColor.Black, "Jack")
     val board = new Board()
-    master = new Master(p1, p2, board)
+    val master = new Master(p1, p2, board)
     master.run()
   }
 
