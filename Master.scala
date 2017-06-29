@@ -4,7 +4,7 @@ class Master(val player1: Player, val player2: Player, val board: Board){
   var blacks = 12
 
   player1.giveColor(CheckerColor.White)
-  player2.giveColor(CheckerColor.Blacks)
+  player2.giveColor(CheckerColor.Black)
 
 
   def run(): Unit ={
@@ -12,17 +12,16 @@ class Master(val player1: Player, val player2: Player, val board: Board){
     var isPlayer1Move = true
 
     while(whites != 0 && blacks != 0){
-      var currPlayer: Player
 
-      currPlayer = if(isPlayer1Move)
+      val currPlayer = if(isPlayer1Move)
         player1
       else
         player2
 
-      val next = currPlayer.getNextMove()
-      List[Move] possible = getAllPossibleMovesFor(next.start, currPlayer)
+      val next = currPlayer.getNextMove(this)
+      val possible = getAllPossibleMovesFor(next.start, currPlayer)
       if(possible.contains(next)) {
-        makeMove(next)
+        makeMove(next, currPlayer)
         if(next.isAttackingMove){
           val attacked = next.whatWasAttacked
           board.free(attacked)
@@ -35,7 +34,7 @@ class Master(val player1: Player, val player2: Player, val board: Board){
       }
 
       if(next.isAttackingMove)
-        ifcurrPlayer = !currPlayer
+        isPlayer1Move = !isPlayer1Move
 
     }
 
@@ -45,22 +44,30 @@ class Master(val player1: Player, val player2: Player, val board: Board){
     if(board.whatCheckerAt(x, y) != player.getColor())
       List[Move]()
 
-    var res = new List[Move]()
+    var res: List[Move] = List()
 
-    val additives = for(x <- (-1, 1); y <- (-1, 1)) yield (x, y)
+    val additives = for(x <- List(-1, 1); y <- List(-1, 1)) yield (x, y)
 
     for((d, e) <- additives){
-      var pos = new Position(x + d, y + e)
+      var pos = new Position(startPos.x + d, startPos.y + e)
       if(board.isInsideBoard(pos) && board.whatCheckerAt(pos) == CheckerColor.None)
-        res += Move(startPos, pos)
+        res ++= new Move(startPos, pos) :: Nil
       else if(board.isInsideBoard(pos) && board.whatCheckerAt(pos) == player2.getColor){
         val vect = new Position(pos.x - startPos.x, pos.y - startPos.y)
 
         if(board.isInsideBoard(pos + vect) &&  board.whatCheckerAt(pos) == CheckerColor.None)
-          res += Move(startPos, pos)
+          res ++= new Move(startPos, pos) :: Nil
       }
     }
 
+    res
+
+  }
+
+
+  private[this] def makeMove(move: Move, pl: Player): Unit ={
+    board.free(move.start)
+    board.standChecker(move.start, pl.getColor)
   }
 
 

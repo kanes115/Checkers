@@ -42,6 +42,14 @@ class Board(){
     false
   }
 
+  def standChecker(checker: CheckerColor, pos: Position): Unit ={
+    fields(pos.x)(pos.y).standChecker(checker)
+  }
+
+  def free(pos: Position) {
+    fields(pos.x)(pos.y) = CheckerColor.None
+  }
+
 
 
 
