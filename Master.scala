@@ -4,10 +4,33 @@ class Master(val player1: Player, val player2: Player, val board: Board){
   var blacks = 12
 
   player1.giveColor(CheckerColor.White)
-  player1.giveColor(CheckerColor.Blacks)
+  player2.giveColor(CheckerColor.Blacks)
 
 
   def run(): Unit ={
+
+    var isPlayer1Move = true
+
+    while(whites != 0 && blacks != 0){
+      var currPlayer: Player
+
+      currPlayer = if(isPlayer1Move)
+        player1
+      else
+        player2
+
+      val next = currPlayer.getNextMove()
+      List[Move] possible = getAllPossibleMovesFor(next.start, currPlayer)
+      if(possible.contains(next)) {
+        makeMove(next)
+        if(next.isAttackingMove{
+          val attacked = next.whatWasAttacked
+          board.free(attacked)
+          blacks -= 1
+        }
+      }
+      
+    }
 
   }
 
