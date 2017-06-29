@@ -23,7 +23,10 @@ class Master(val player1: Player, val player2: Player, val board: Board){
       var pos = new Position(x + d, y + e)
       if(board.isInsideBoard(pos) && board.whatCheckerAt(pos) == CheckerColor.None)
         res += Move(startPos, pos)
-      else if(board.isInsideBoard(pos) && board.whatCheckerAt(pos) == player2.getColor)
+      else if(board.isInsideBoard(pos) && board.whatCheckerAt(pos) == player2.getColor){
+        val vect = (pos.x - startPos.x, pos.y - startPos.y)
+
+      }
     }
 
 
