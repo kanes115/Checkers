@@ -7,4 +7,6 @@ class Position(val x: Int, val y: Int) {
   def -(pos: Position) = {
     new Position(this.x - pos.x, this.y - y)
   }
+
+  override def toString: String = "(" + x + ", " + y + ")"
 }

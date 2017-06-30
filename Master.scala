@@ -21,7 +21,9 @@ class Master(val player1: Player, val player2: Player, val board: Board){
         player2
 
       val next = currPlayer.getNextMove(this)
+      println(next)
       val possible = getAllPossibleMovesFor(next.start, currPlayer)
+      println(possible)
       if(possible.contains(next)) {
         makeMove(next, currPlayer)
         if(next.isAttackingMove){
@@ -33,15 +35,16 @@ class Master(val player1: Player, val player2: Player, val board: Board){
           else
             whites -= 1
         }
+        if(!next.isAttackingMove)
+          isPlayer1Move = !isPlayer1Move
       }
-
-      if(next.isAttackingMove)
-        isPlayer1Move = !isPlayer1Move
-
+      else
+        println("incorrect move!")
     }
 
   }
 
+  //tu błąd
   def getAllPossibleMovesFor(startPos: Position, player: Player): List[Move] = {
     if(board.whatCheckerAt(startPos) != player.getColor())
       List[Move]()
@@ -51,7 +54,7 @@ class Master(val player1: Player, val player2: Player, val board: Board){
     val additives = for(x <- List(-1, 1); y <- List(-1, 1)) yield (x, y)
 
     for((d, e) <- additives){
-      var pos = new Position(startPos.x + d, startPos.y + e)
+      var pos = startPos + new Position(d, e)
       if(board.isInsideBoard(pos) && board.whatCheckerAt(pos) == CheckerColor.None)
         res ++= new Move(startPos, pos) :: Nil
       else if(board.isInsideBoard(pos) && board.whatCheckerAt(pos) == player2.getColor){
@@ -61,9 +64,7 @@ class Master(val player1: Player, val player2: Player, val board: Board){
           res ++= new Move(startPos, pos) :: Nil
       }
     }
-
     res
-
   }
 
 

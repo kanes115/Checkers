@@ -16,7 +16,6 @@ class Board(){
   def isOccupied(pos: Position) = fields(pos.x)(pos.y).isOccupied
 
   def whatCheckerAt(pos: Position) = {
-    println(pos.x, pos.y)
     fields(pos.x)(pos.y).occupiedBy
   }
 
