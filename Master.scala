@@ -37,8 +37,10 @@ class Master(val player1: Player, val player2: Player, val board: Board){
 
           //to check if now has attacking moves
 
+          val afterMoves = getAllPossibleMovesFor(next.end, currPlayer)
 
-          isPlayer1Move = !isPlayer1Move
+          if(!afterMoves.filter(e => e.isAttackingMove).isEmpty)
+            isPlayer1Move = !isPlayer1Move
         }
         isPlayer1Move = !isPlayer1Move
       }
