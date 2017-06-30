@@ -20,10 +20,11 @@ class Master(val player1: Player, val player2: Player, val board: Board){
       else
         player2
 
+      
       val next = currPlayer.getNextMove(this)
-      println(next)
+
       val possible = getAllPossibleMovesFor(next.start, currPlayer)
-      println(possible)
+
       if(possible.contains(next)) {
         makeMove(next, currPlayer)
         if(next.isAttackingMove){
@@ -69,7 +70,7 @@ class Master(val player1: Player, val player2: Player, val board: Board){
 
       if(board.isInsideBoard(destPos) && board.whatCheckerAt(destPos) == CheckerColor.None)
         res ++= new Move(startPos, destPos) :: Nil
-      else if(board.isInsideBoard(destPos) && board.whatCheckerAt(destPos) == player2.getColor){
+      else if(board.isInsideBoard(destPos) && (board.whatCheckerAt(destPos) != player.getColor && board.whatCheckerAt(destPos) != CheckerColor.None)){
 
         if(board.isInsideBoard(destPos + vector) &&  board.whatCheckerAt(destPos + vector) == CheckerColor.None)
           res ++= new Move(startPos, destPos + vector) :: Nil
