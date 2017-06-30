@@ -16,7 +16,6 @@ class Board(){
   def isOccupied(pos: Position) = fields(pos.x)(pos.y).isOccupied
 
   def whatCheckerAt(pos: Position) = {
-    println(pos.x, pos.y)
     fields(pos.x)(pos.y).occupiedBy
   }
 
@@ -54,7 +53,8 @@ class Board(){
   def isInsideBoard(pos: Position): Boolean = {
     if(pos.x >= 0 && pos.x < boardSize && pos.y >= 0 && pos.y < boardSize)
       true
-    false
+    else
+      false
   }
 
   def standChecker(checker: CheckerColor, pos: Position): Unit ={

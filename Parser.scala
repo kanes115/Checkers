@@ -38,8 +38,8 @@ object Parser {
     if(!correctness(line)) throw new InvalidFormatException("Wrong argument")
     else{
       //zwrócenie funkcji
-      val start = new Position(line(0).toInt - 64, line(1).toInt - 48)
-      val end = new Position(line(3).toInt - 64, line(4).toInt - 48)
+      val start = new Position(line(0).toInt - 65, line(1).toInt - 49)
+      val end = new Position(line(3).toInt - 65, line(4).toInt - 49)
       // return
       new Move(start, end)
     }
