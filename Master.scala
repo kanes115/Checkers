@@ -34,9 +34,13 @@ class Master(val player1: Player, val player2: Player, val board: Board){
             blacks -= 1
           else
             whites -= 1
-        }
-        if(!next.isAttackingMove)
+
+          //to check if now has attacking moves
+
+
           isPlayer1Move = !isPlayer1Move
+        }
+        isPlayer1Move = !isPlayer1Move
       }
       else
         println("incorrect move!")
@@ -45,23 +49,28 @@ class Master(val player1: Player, val player2: Player, val board: Board){
   }
 
   //tu błąd
-  def getAllPossibleMovesFor(startPos: Position, player: Player): List[Move] = {
-    if(board.whatCheckerAt(startPos) != player.getColor())
-      List[Move]()
+  def getAllPossibleMovesFor(startPos: Position, player: Player): Set[Move] = {
+    if(board.whatCheckerAt(startPos) != player.getColor()) {
+      println("Not your piece")
+      Set[Move]()
+    }
 
-    var res: List[Move] = List()
+    var res: Set[Move] = Set()
 
     val additives = for(x <- List(-1, 1); y <- List(-1, 1)) yield (x, y)
 
     for((d, e) <- additives){
-      var pos = startPos + new Position(d, e)
-      if(board.isInsideBoard(pos) && board.whatCheckerAt(pos) == CheckerColor.None)
-        res ++= new Move(startPos, pos) :: Nil
-      else if(board.isInsideBoard(pos) && board.whatCheckerAt(pos) == player2.getColor){
-        val vect = new Position(pos.x - startPos.x, pos.y - startPos.y)
 
-        if(board.isInsideBoard(pos + vect) &&  board.whatCheckerAt(pos) == CheckerColor.None)
-          res ++= new Move(startPos, pos) :: Nil
+      val vector = new Position(d, e)
+
+      var destPos = startPos + vector
+
+      if(board.isInsideBoard(destPos) && board.whatCheckerAt(destPos) == CheckerColor.None)
+        res ++= new Move(startPos, destPos) :: Nil
+      else if(board.isInsideBoard(destPos) && board.whatCheckerAt(destPos) == player2.getColor){
+
+        if(board.isInsideBoard(destPos + vector) &&  board.whatCheckerAt(destPos + vector) == CheckerColor.None)
+          res ++= new Move(startPos, destPos + vector) :: Nil
       }
     }
     res
@@ -69,8 +78,10 @@ class Master(val player1: Player, val player2: Player, val board: Board){
 
 
   private[this] def makeMove(move: Move, pl: Player): Unit ={
-    board.free(new Position(move.start.x, move.start.y))
-    board.standChecker(pl.getColor, new Position(move.start.x, move.start.y))
+    println(move)
+    println(pl)
+    board.free(move.start)
+    board.standChecker(pl.getColor, new Position(move.end.x, move.end.y))
   }
 
 

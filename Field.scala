@@ -11,6 +11,7 @@ class Field(val x: Int, val y: Int, var occupiedBy: CheckerColor = CheckerColor.
 
   def standChecker(checker: CheckerColor): Unit ={
     occupiedBy = checker
+    println("standing checker " + checker + " at " + x + ", " + y)
   }
 
   def isOccupied(): Boolean ={

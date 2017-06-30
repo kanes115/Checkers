@@ -7,7 +7,7 @@ class Move(val start: Position, val end: Position) {
       false
   }
 
-  def whatWasAttacked(): Position = end - start
+  def whatWasAttacked(): Position = new Position((end.x + start.x) / 2, (end.y + start.y) / 2)
 
   override def toString: String = {
     val res = "From " + start + "to" + end
