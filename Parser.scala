@@ -46,8 +46,10 @@ object Parser {
   }
 
   def main(args: Array[String]): Unit = {
-    val p1: Player = new RealPlayer(CheckerColor.White, "Eddie")
-    val p2: Player = new RealPlayer(CheckerColor.Black, "Jack")
+    println("Insert player1 (White):")
+    val p1: Player = new RealPlayer(CheckerColor.White, scala.io.StdIn.readLine())
+    println("Insert player2 (Black):")
+    val p2: Player = new RealPlayer(CheckerColor.Black, scala.io.StdIn.readLine())
     val board = new Board()
     val master = new Master(p1, p2, board)
     master.run()

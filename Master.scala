@@ -11,42 +11,47 @@ class Master(val player1: Player, val player2: Player, val board: Board){
 
     var isPlayer1Move = true
 
-    while(whites != 0 && blacks != 0){
+    while(whites != 0 && blacks != 0) {
 
       println(board)
 
-      val currPlayer = if(isPlayer1Move)
+      val currPlayer = if (isPlayer1Move)
         player1
       else
         player2
 
-      
-      val next = currPlayer.getNextMove(this)
 
-      val possible = getAllPossibleMovesFor(next.start, currPlayer)
+      try{
+        val next = currPlayer.getNextMove(this)
 
-      if(possible.contains(next)) {
-        makeMove(next, currPlayer)
-        if(next.isAttackingMove){
-          val attacked = next.whatWasAttacked
-          board.free(attacked)
+        val possible = getAllPossibleMovesFor(next.start, currPlayer)
 
-          if(isPlayer1Move)
-            blacks -= 1
-          else
-            whites -= 1
+        if (possible.contains(next)) {
+          makeMove(next, currPlayer)
+          if (next.isAttackingMove) {
+            val attacked = next.whatWasAttacked
+            board.free(attacked)
 
-          //to check if now has attacking moves
+            if (isPlayer1Move)
+              blacks -= 1
+            else
+              whites -= 1
 
-          val afterMoves = getAllPossibleMovesFor(next.end, currPlayer)
+            //to check if now has attacking moves
 
-          if(!afterMoves.filter(e => e.isAttackingMove).isEmpty)
-            isPlayer1Move = !isPlayer1Move
+            val afterMoves = getAllPossibleMovesFor(next.end, currPlayer)
+
+            if (!afterMoves.filter(e => e.isAttackingMove).isEmpty)
+              isPlayer1Move = !isPlayer1Move
+          }
+          isPlayer1Move = !isPlayer1Move
         }
-        isPlayer1Move = !isPlayer1Move
+        else
+          println("incorrect move!")
+
+      }catch{
+        case e: Exception => println("Invalid Format, " + currPlayer.getName)
       }
-      else
-        println("incorrect move!")
     }
 
   }
@@ -55,7 +60,7 @@ class Master(val player1: Player, val player2: Player, val board: Board){
   def getAllPossibleMovesFor(startPos: Position, player: Player): Set[Move] = {
     if(board.whatCheckerAt(startPos) != player.getColor()) {
       println("Not your piece")
-      Set[Move]()
+      return Set[Move]()
     }
 
     var res: Set[Move] = Set()
