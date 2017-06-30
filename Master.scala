@@ -69,8 +69,8 @@ class Master(val player1: Player, val player2: Player, val board: Board){
 
 
   private[this] def makeMove(move: Move, pl: Player): Unit ={
-    board.free(move.start)
-    board.standChecker(pl.getColor, move.start)
+    board.free(new Position(move.start.x, move.start.y))
+    board.standChecker(pl.getColor, new Position(move.start.x, move.start.y))
   }
 
 
