@@ -16,15 +16,13 @@ class Move(val start: Position, val end: Position) {
   }
 
   override def equals(obj: scala.Any): Boolean = {
-    if(obj.getClass != Move)
-      return false
-    else{
-      val other: Move = (Move) obj
-      if(start.x == other.start.x && end.x == other.end.x && start.y == other.start.y && end.y == other.end.y)
-        return true
-      else
-        return false
+    obj match{
+      case other: Move =>
+        if(start.x == other.start.x && end.x == other.end.x && start.y == other.start.y && end.y == other.end.y)
+          return true
+        else
+          return false
+      case _ => false
     }
   }
-
 }
